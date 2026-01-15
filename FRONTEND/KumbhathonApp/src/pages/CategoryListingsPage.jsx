@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './CategoryListingsPage.css';
 
 const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hotels' }) => {
+  const [showBackBtn, setShowBackBtn] = useState(true);
   const title = type === 'hotels' ? 'All Hotels' : type === 'homestays' ? 'All Homestays' : 'All Tents';
   const items = accommodations[type];
 
+  useEffect(() => {
+    let lastScroll = 0;
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset;
+      setShowBackBtn(currentScroll <= lastScroll || currentScroll < 100);
+      lastScroll = currentScroll;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className="category-listings-page">
-      <button className="back-btn" onClick={onBack}>
+      <button className={`back-btn ${showBackBtn ? 'visible' : 'hidden'}`} onClick={onBack}>
         <i className="fas fa-arrow-left"></i>
       </button>
 
