@@ -3,6 +3,7 @@ import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
+import ContactUs from './ContactUs';
 import HeroSection from '../components/landing/HeroSection';
 import CategoryCarousel from '../components/landing/CategoryCarousel';
 import CategoryListingsPage from './CategoryListingsPage';
@@ -14,7 +15,7 @@ const LandingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState('login');
-  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'listings', 'detail', 'login', 'signup'
+  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'listings', 'detail', 'login', 'signup', 'contact'
   const [selectedCategory, setSelectedCategory] = useState('hotels');
   const [selectedProperty, setSelectedProperty] = useState(null);
 
@@ -52,6 +53,22 @@ const LandingPage = () => {
     setSelectedProperty(null);
   };
 
+  // Show Contact Us Page
+  if (currentView === 'contact') {
+    return (
+      <div className="landing-page">
+        <Header 
+          isLoggedIn={isLoggedIn} 
+          onAuthClick={handleAuthClick}
+          onLogout={handleLogout}
+          onNavigate={setCurrentView}
+        />
+        <ContactUs />
+        <Footer />
+      </div>
+    );
+  }
+
   // Show Login Page
   if (currentView === 'login') {
     return (
@@ -79,6 +96,7 @@ const LandingPage = () => {
           isLoggedIn={isLoggedIn} 
           onAuthClick={handleAuthClick}
           onLogout={handleLogout}
+          onNavigate={setCurrentView}
         />
         <PropertyDetailPage 
           property={selectedProperty}
@@ -96,6 +114,7 @@ const LandingPage = () => {
           isLoggedIn={isLoggedIn} 
           onAuthClick={handleAuthClick}
           onLogout={handleLogout}
+          onNavigate={setCurrentView}
         />
         <CategoryListingsPage 
           accommodations={accommodations}
@@ -114,6 +133,7 @@ const LandingPage = () => {
         isLoggedIn={isLoggedIn} 
         onAuthClick={handleAuthClick}
         onLogout={handleLogout}
+        onNavigate={setCurrentView}
       />
       
       <main className="main-content">
@@ -123,7 +143,9 @@ const LandingPage = () => {
           <div className="accommodations-content">
             <div className="section-header">
               <h2 className="section-title">Choose Your Stay Experience</h2>
-             
+              <p className="section-subtitle">
+                From luxury hotels to traditional tents, find accommodation that suits your needs for the sacred Kumbh Mela 2027
+              </p>
             </div>
 
             <CategoryCarousel 

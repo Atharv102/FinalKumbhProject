@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Header.css';
 
-const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
+const Header = ({ isLoggedIn, onAuthClick, onLogout, onNavigate }) => {
   const [activeNav, setActiveNav] = useState('home');
   const [hoveredNav, setHoveredNav] = useState(null);
 
@@ -31,7 +31,14 @@ const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
             <button 
               key={item.id}
               className={`nav-btn ${(hoveredNav === item.id || (activeNav === item.id && hoveredNav === null)) ? 'nav-btn-active' : ''}`}
-              onClick={() => setActiveNav(item.id)}
+              onClick={() => {
+                setActiveNav(item.id);
+                if (item.id === 'home' && onNavigate) {
+                  onNavigate('landing');
+                } else if (item.id === 'contact' && onNavigate) {
+                  onNavigate('contact');
+                }
+              }}
               onMouseEnter={() => setHoveredNav(item.id)}
               onMouseLeave={() => setHoveredNav(null)}
             >
