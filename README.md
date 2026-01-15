@@ -11,7 +11,7 @@ A full-stack accommodation booking platform for Kumbh Mela 2027, Nashik.
 ```
 Kumbhathon/
 ├── FRONTEND/
-│   └── KumbhathonApp/          # Main React Application
+│   └── KumbhathonApp/          # Complete React Application
 │       ├── src/
 │       │   ├── components/     # Reusable components
 │       │   ├── pages/          # Page components
@@ -19,7 +19,8 @@ Kumbhathon/
 │       ├── README.md           # Frontend documentation
 │       └── package.json
 │
-└── BACKEND/                    # Backend API (if applicable)
+└── BACKEND/                    # Backend API (placeholder)
+    └── README.md
 ```
 
 ---
@@ -29,6 +30,10 @@ Kumbhathon/
 ### Frontend Setup
 
 ```bash
+# Clone repository
+git clone https://github.com/chaitanya686/FinalKumbhProject.git
+cd FinalKumbhProject
+
 # Navigate to frontend
 cd FRONTEND/KumbhathonApp
 
