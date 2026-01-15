@@ -8,8 +8,10 @@ const errorHandler = require('./src/middleware/errorHandler');
 // Load env vars
 dotenv.config();
 
-// Connect to database
-connectDB();
+// Connect to database only if MongoDB URI is provided
+if (process.env.MONGODB_URI && process.env.MONGODB_URI !== 'mongodb://localhost:27017/kumbhathon') {
+  connectDB();
+}
 
 const app = express();
 
@@ -31,6 +33,9 @@ app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
 app.use('/api/photos', require('./src/routes/photoRoutes'));
 app.use('/api/bookings', require('./src/routes/bookingRoutes'));
+
+// New accommodations route for filtering
+app.use('/api/accommodations', require('./routes/accommodations'));
 
 // Health check
 app.get('/api/health', (req, res) => {

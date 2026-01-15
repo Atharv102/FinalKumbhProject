@@ -50,7 +50,7 @@ const LoginPage = ({ onClose, onSwitchToSignup, onSuccess }) => {
           <div className="auth-visual-side">
             <img 
               src="/src/data/img for signup page.png" 
-              alt="Kumbhathon" 
+              alt="Aasray" 
               className="auth-visual-image"
             />
           </div>

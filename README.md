@@ -1,4 +1,4 @@
-# Kumbhathon 2027 - Complete Project
+# Aasray 2027 - Complete Project
 
 ## 🏆 Trustworthy Stays & Accommodation Experience
 
@@ -9,7 +9,7 @@ A full-stack accommodation booking platform for Kumbh Mela 2027, Nashik.
 ## 📁 Project Structure
 
 ```
-Kumbhathon/
+Aasray/
 ├── FRONTEND/
 │   └── KumbhathonApp/          # Complete React Application
 │       ├── src/
@@ -127,14 +127,14 @@ Addressing critical challenges:
 ## 📞 Contact
 
 For queries:
-- Email: support@kumbhathon2027.com
+- Email: support@aasray2027.com
 - Phone: +91 1800 123 4567
 
 ---
 
 ## 📄 License
 
-Created for Kumbhathon Hackathon 2027
+Created for Aasray Hackathon 2027
 
 ---
 

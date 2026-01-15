@@ -1,4 +1,4 @@
-# Kumbhathon - Trustworthy Stays & Accommodation Experience
+# Aasray - Trustworthy Stays & Accommodation Experience
 
 ## 🏆 Hackathon Project for Kumbh Mela 2027, Nashik
 
@@ -78,7 +78,7 @@ Addressing multi-faceted problems involving:
 ## 📁 Project Structure
 
 ```
-KumbhathonApp/
+AasrayApp/
 ├── public/
 │   └── vite.svg
 ├── src/
@@ -120,7 +120,7 @@ KumbhathonApp/
 
 1. **Navigate to project directory**
    ```bash
-   cd D:\VSfiles\Kumbhthon\FRONTEND\KumbhathonApp
+   cd D:\VSfiles\Aasray\FRONTEND\KumbhathonApp
    ```
 
 2. **Install dependencies**
@@ -262,7 +262,7 @@ Landing Page
 
 ## 📄 License
 
-This project is created for Kumbhathon Hackathon 2027.
+This project is created for Aasray Hackathon 2027.
 
 ---
 
@@ -278,7 +278,7 @@ This project is created for Kumbhathon Hackathon 2027.
 ## 📞 Contact
 
 For queries regarding this project:
-- Email: support@kumbhathon2027.com
+- Email: support@aasray2027.com
 - Phone: +91 1800 123 4567
 
 ---

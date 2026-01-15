@@ -8,11 +8,9 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-column">
             <div className="footer-logo-container">
-              <div className="footer-logo-circle">
-                <span className="footer-logo-text">कुं</span>
-              </div>
+              <img src="/applogo.jpeg" alt="Aasray Logo" className="footer-logo-image" />
               <div className="footer-logo-text-container">
-                <h2 className="footer-logo-title">KUMBHATHON</h2>
+                <h2 className="footer-logo-title">AASRAY</h2>
                 <p className="footer-logo-subtitle">Nashik 2027</p>
               </div>
             </div>
@@ -65,14 +63,14 @@ const Footer = () => {
               </li>
               <li className="contact-item">
                 <i className="fas fa-envelope contact-icon"></i>
-                <span className="contact-text">support@kumbhathon2027.com</span>
+                <span className="contact-text">support@aasray2027.com</span>
               </li>
             </ul>
           </div>
         </div>
         
         <div className="footer-bottom">
-          <p className="copyright">© 2027 Kumbhathon - Smart Accommodation Platform for Kumbh Mela 2027. All rights reserved.</p>
+          <p className="copyright">© 2027 Aasray - Smart Accommodation Platform for Kumbh Mela 2027. All rights reserved.</p>
         </div>
       </div>
     </footer>

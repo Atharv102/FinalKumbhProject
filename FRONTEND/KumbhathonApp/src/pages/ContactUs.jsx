@@ -71,33 +71,6 @@ const ContactUs = () => {
     }
   ];
 
-  const contactInfo = [
-    {
-      icon: "fas fa-map-marker-alt",
-      title: "Visit Our Office",
-      details: ["Kumbhathon Headquarters", "Near Ram Kund, Panchavati", "Nashik, Maharashtra 422003"],
-      color: "#FF9933"
-    },
-    {
-      icon: "fas fa-phone",
-      title: "Call Us",
-      details: ["General Enquiries: +91 1800 123 4567", "Booking Support: +91 1800 123 4568", "Emergency: +91 98230 12345"],
-      color: "#4CAF50"
-    },
-    {
-      icon: "fas fa-envelope",
-      title: "Email Us",
-      details: ["General: info@kumbhathon2027.com", "Support: support@kumbhathon2027.com", "Partnerships: partner@kumbhathon2027.com"],
-      color: "#2196F3"
-    },
-    {
-      icon: "fas fa-clock",
-      title: "Working Hours",
-      details: ["Monday - Friday: 8:00 AM - 10:00 PM", "Saturday - Sunday: 9:00 AM - 11:00 PM", "24/7 Emergency Support Available"],
-      color: "#9C27B0"
-    }
-  ];
-
   const accommodationTypes = [
     { value: 'general', label: 'General Inquiry' },
     { value: 'hotel', label: 'Hotel Booking' },
@@ -136,27 +109,6 @@ const ContactUs = () => {
       </div>
 
       <div className="contact-container">
-        {/* Contact Cards */}
-        <div className="contact-info-section">
-          <h2 className="section-title">Get in Touch</h2>
-          
-          <div className="contact-cards-grid">
-            {contactInfo.map((item, index) => (
-              <div key={index} className="contact-card">
-                <div className="card-icon" style={{ backgroundColor: item.color }}>
-                  <i className={item.icon}></i>
-                </div>
-                <h3 className="card-title">{item.title}</h3>
-                <div className="card-details">
-                  {item.details.map((detail, idx) => (
-                    <p key={idx} className="card-detail">{detail}</p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
         {/* Contact Form & Map */}
         <div className="contact-main-section">
           {/* Contact Form */}

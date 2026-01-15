@@ -66,11 +66,9 @@ const Header = ({ isLoggedIn, onAuthClick, onLogout, onNavigate }) => {
     <header className="header">
       <div className="header-content">
         <div className="logo-container">
-          <div className="logo-circle">
-            <span className="logo-text">कुं</span>
-          </div>
+          <img src="/applogo.jpeg" alt="Aasray Logo" className="logo-image" />
           <div className="logo-text-container">
-            <h1 className="logo-title">KUMBHATHON</h1>
+            <h1 className="logo-title">AASRAY</h1>
             <p className="logo-subtitle">Nashik 2027</p>
           </div>
         </div>
@@ -86,6 +84,12 @@ const Header = ({ isLoggedIn, onAuthClick, onLogout, onNavigate }) => {
                   onNavigate('landing');
                 } else if (item.id === 'contact' && onNavigate) {
                   onNavigate('contact');
+                } else if (item.id === 'accommodation' && onNavigate) {
+                  onNavigate('accommodation');
+                } else if (item.id === 'explore' && onNavigate) {
+                  onNavigate('explore');
+                } else if (item.id === 'services' && onNavigate) {
+                  onNavigate('services');
                 }
               }}
               onMouseEnter={() => setHoveredNav(item.id)}

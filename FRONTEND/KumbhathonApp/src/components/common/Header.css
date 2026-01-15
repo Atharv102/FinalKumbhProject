@@ -23,6 +23,14 @@
   gap: 0.5rem;
 }
 
+.logo-image {
+  width: 4.8125rem;
+  height: 4.8125rem;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
 .logo-circle {
   width: 2.75rem;
   height: 2.75rem;

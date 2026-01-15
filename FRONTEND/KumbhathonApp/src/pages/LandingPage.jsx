@@ -4,6 +4,9 @@ import Footer from '../components/common/Footer';
 import LoginPage from './LoginPage';
 import SignUpPage from './SignUpPage';
 import ContactUs from './ContactUs';
+import AccommodationPage from './AccommodationPage';
+import ExploreNashikPage from './ExploreNashikPage';
+import ServicesPage from './ServicesPage';
 import HeroSection from '../components/landing/HeroSection';
 import CategoryCarousel from '../components/landing/CategoryCarousel';
 import CategoryListingsPage from './CategoryListingsPage';
@@ -150,6 +153,61 @@ const LandingPage = () => {
     );
   }
 
+  // Show Accommodation Page
+  if (currentView === 'accommodation') {
+    return (
+      <div className="landing-page">
+        <Header
+          isLoggedIn={isLoggedIn}
+          onAuthClick={handleAuthClick}
+          onLogout={handleLogout}
+          onNavigate={setCurrentView}
+        />
+        <AccommodationPage 
+          onCardClick={handleCardClick}
+          onBack={() => setCurrentView('landing')}
+        />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show Explore Nashik Page
+  if (currentView === 'explore') {
+    return (
+      <div className="landing-page">
+        <Header
+          isLoggedIn={isLoggedIn}
+          onAuthClick={handleAuthClick}
+          onLogout={handleLogout}
+          onNavigate={setCurrentView}
+        />
+        <ExploreNashikPage 
+          onBack={() => setCurrentView('landing')}
+        />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Show Services Page
+  if (currentView === 'services') {
+    return (
+      <div className="landing-page">
+        <Header
+          isLoggedIn={isLoggedIn}
+          onAuthClick={handleAuthClick}
+          onLogout={handleLogout}
+          onNavigate={setCurrentView}
+        />
+        <ServicesPage 
+          onBack={() => setCurrentView('landing')}
+        />
+        <Footer />
+      </div>
+    );
+  }
+
   // Show Login Page
   if (currentView === 'login') {
     return (
@@ -232,9 +290,6 @@ const LandingPage = () => {
           <div className="accommodations-content">
             <div className="section-header">
               <h2 className="section-title">Choose Your Stay Experience</h2>
-              <p className="section-subtitle">
-                From luxury hotels to traditional tents, find accommodation that suits your needs for the sacred Kumbh Mela 2027
-              </p>
             </div>
 
             {loading ? (

@@ -31,26 +31,28 @@
 
 .security-badge {
   position: absolute;
-  top: 0.5rem;
-  left: 0.5rem;
+  top: 0.4rem;
+  left: 0.4rem;
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  border-radius: 9999px;
-  background-color: #FFFFFF;
+  gap: 0.150rem;
+  padding: 0.150rem 0.390rem;
+  border-radius: 0.30rem;
+  background-color: rgba(255, 255, 255, 0.95);
   color: #000000;
-  font-size: 0.7rem;
+  font-size: 0.635rem;
   font-weight: 600;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
 }
 
 .security-icon {
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 .security-text {
   white-space: nowrap;
+  font-size: 0.625rem;
 }
 
 /* Arrow positioned at top-right, partially overlaid on image */
