@@ -3,8 +3,6 @@ import './CategoryListingsPage.css';
 
 const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hotels' }) => {
   const [showBackBtn, setShowBackBtn] = useState(true);
-  const title = type === 'hotels' ? 'All Hotels' : type === 'homestays' ? 'All Homestays' : 'All Tents';
-  const items = accommodations[type];
 
   useEffect(() => {
     let lastScroll = 0;
@@ -17,6 +15,20 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  console.log('CategoryListingsPage render:', { type, accommodations, hasData: !!accommodations });
+
+  if (!accommodations) {
+    return <div style={{ padding: '2rem', textAlign: 'center', color: '#666' }}>Loading...</div>;
+  }
+
+  const title = type === 'hotels' ? 'All Hotels' : type === 'homestays' ? 'All Homestays' : type === 'tents' ? 'All Tents' : 'All Dormitories';
+  const items = accommodations[type] || [];
+
+  console.log('CategoryListingsPage - type:', type);
+  console.log('CategoryListingsPage - accommodations keys:', Object.keys(accommodations));
+  console.log('CategoryListingsPage - items:', items);
+  console.log('CategoryListingsPage - items.length:', items.length);
+
   return (
     <div className="category-listings-page">
       <button className={`back-btn ${showBackBtn ? 'visible' : 'hidden'}`} onClick={onBack}>
@@ -28,32 +40,37 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
         <div className="listings-section">
           <h1 className="listings-title">{title}</h1>
           <p className="listings-subtitle">Browse all available {type} for Kumbh Mela 2027</p>
-          
+
           <div className="listings-grid">
-            {items.map((item) => {
-              const imageUrl = item.image || (item.images && item.images[0]?.url) || 'https://via.placeholder.com/500x300?text=No+Image';
-              const displayName = item.name || item.title;
-              const displayPrice = item.price || `₹${item.pricing?.basePrice}`;
-              const displayRating = item.rating || item.ratings?.average || 0;
-              const displayLocation = item.location?.address || item.location?.city || item.location;
-              const displayAmenities = item.amenities?.join(', ') || item.amenities;
-              
-              return (
-              <div key={item.id || item._id} className="listing-card" onClick={() => onCardClick(item)}>
-                <img src={imageUrl} alt={displayName} className="listing-image" />
-                <div className="listing-details">
-                  <h3 className="listing-name">{displayName}</h3>
-                  <p className="listing-location">
-                    <i className="fas fa-map-marker-alt"></i> {displayLocation}
-                  </p>
-                  <p className="listing-amenities">{displayAmenities}</p>
-                  <div className="listing-footer">
-                    <span className="listing-price">{displayPrice}/night</span>
-                    <span className="listing-rating">{displayRating} ★</span>
+            {items.length === 0 ? (
+              <p style={{ gridColumn: '1/-1', textAlign: 'center', padding: '2rem' }}>No properties found</p>
+            ) : (
+              items.map((item) => {
+                const imageUrl = item.image || (item.images && item.images[0]?.url) || 'https://via.placeholder.com/500x300?text=No+Image';
+                const displayName = item.name || item.title;
+                const displayPrice = item.price || `₹${item.pricing?.basePrice}`;
+                const displayRating = item.rating || item.ratings?.average || 0;
+                const displayLocation = item.location?.address || item.location?.city || item.location;
+                const displayAmenities = Array.isArray(item.amenities) ? item.amenities.join(', ') : item.amenities || '';
+
+                return (
+                  <div key={item.id || item._id} className="listing-card" onClick={() => onCardClick(item)}>
+                    <img src={imageUrl} alt={displayName} className="listing-image" />
+                    <div className="listing-details">
+                      <h3 className="listing-name">{displayName}</h3>
+                      <p className="listing-location">
+                        <i className="fas fa-map-marker-alt"></i> {displayLocation}
+                      </p>
+                      <p className="listing-amenities">{displayAmenities}</p>
+                      <div className="listing-footer">
+                        <span className="listing-price">{displayPrice}/night</span>
+                        <span className="listing-rating">{displayRating} ★</span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )})}
+                )
+              })
+            )}
           </div>
         </div>
 
@@ -68,7 +85,7 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
-              //title="Nashik Map"
+            //title="Nashik Map"
             ></iframe>
           </div>
 
@@ -80,13 +97,13 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
             <p className="planner-description">
               Get personalized travel plans for your Nashik visit during Kumbh Mela 2027
             </p>
-            
+
             <div className="planner-form">
               <div className="form-field">
                 <label className="form-label">Number of Days</label>
-                <input 
-                  type="number" 
-                  placeholder="e.g., 3" 
+                <input
+                  type="number"
+                  placeholder="e.g., 3"
                   className="planner-input"
                   min="1"
                   max="30"

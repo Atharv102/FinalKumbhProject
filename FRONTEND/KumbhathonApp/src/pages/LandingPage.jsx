@@ -19,7 +19,12 @@ const LandingPage = () => {
   const [currentView, setCurrentView] = useState('landing'); // 'landing', 'listings', 'detail', 'login', 'signup', 'contact'
   const [selectedCategory, setSelectedCategory] = useState('hotels');
   const [selectedProperty, setSelectedProperty] = useState(null);
-  const [properties, setProperties] = useState({ hotels: [], homestays: [], tents: [], dormitories: [] });
+  const [properties, setProperties] = useState({
+    hotels: accommodations.hotels,
+    homestays: accommodations.homestays,
+    tents: accommodations.tents,
+    dormitories: accommodations.dormitories
+  });
   const [searchResults, setSearchResults] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -35,11 +40,11 @@ const LandingPage = () => {
     try {
       const response = await propertyAPI.getAll();
       const allProperties = response.data || [];
-      
+
       if (!allProperties || allProperties.length === 0) {
         throw new Error('No properties found');
       }
-      
+
       // Group properties by type
       const grouped = {
         hotels: allProperties.filter(p => p.type === 'hotel'),
@@ -47,7 +52,7 @@ const LandingPage = () => {
         tents: allProperties.filter(p => p.type === 'tent'),
         dormitories: allProperties.filter(p => p.type === 'dormitory')
       };
-      
+
       setProperties(grouped);
     } catch (error) {
       console.error('Error loading properties:', error);
@@ -70,9 +75,9 @@ const LandingPage = () => {
         search: searchParams.search,
         guests: searchParams.guests
       });
-      
+
       const results = response.data;
-      
+
       // Group search results by type
       const grouped = {
         hotels: results.filter(p => p.type === 'hotel'),
@@ -80,7 +85,7 @@ const LandingPage = () => {
         tents: results.filter(p => p.type === 'tent'),
         dormitories: results.filter(p => p.type === 'dormitory')
       };
-      
+
       setSearchResults(grouped);
       setCurrentView('search-results');
     } catch (error) {
@@ -133,8 +138,8 @@ const LandingPage = () => {
   if (currentView === 'contact') {
     return (
       <div className="landing-page">
-        <Header 
-          isLoggedIn={isLoggedIn} 
+        <Header
+          isLoggedIn={isLoggedIn}
           onAuthClick={handleAuthClick}
           onLogout={handleLogout}
           onNavigate={setCurrentView}
@@ -148,7 +153,7 @@ const LandingPage = () => {
   // Show Login Page
   if (currentView === 'login') {
     return (
-      <LoginPage 
+      <LoginPage
         onClose={() => setCurrentView('landing')}
         onSwitchToSignup={() => setCurrentView('signup')}
         onSuccess={handleAuthSuccess}
@@ -159,7 +164,7 @@ const LandingPage = () => {
   // Show Sign Up Page
   if (currentView === 'signup') {
     return (
-      <SignUpPage 
+      <SignUpPage
         onClose={() => setCurrentView('landing')}
         onSwitchToLogin={() => setCurrentView('login')}
         onSuccess={handleAuthSuccess}
@@ -187,9 +192,9 @@ const LandingPage = () => {
 
   // Show search results or regular listings
   if (currentView === 'listings' || currentView === 'search-results') {
-    const displayData = currentView === 'search-results' ? searchResults : { [selectedCategory]: properties[selectedCategory] };
+    const displayData = currentView === 'search-results' ? searchResults : properties;
     const isSearchResults = currentView === 'search-results';
-    
+
     return (
       <div className="landing-page">
         <Header
@@ -219,7 +224,7 @@ const LandingPage = () => {
         onLogout={handleLogout}
         onNavigate={setCurrentView}
       />
-      
+
       <main className="main-content">
         <HeroSection onSearch={handleSearch} />
 
