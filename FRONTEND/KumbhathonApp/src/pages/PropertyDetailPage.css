@@ -1,19 +1,20 @@
 .accommodation-detail-page {
   min-height: 100vh;
   background-color: #F3F4F6;
-  padding: 5rem 1rem 2rem;
+  padding: 5.5rem 1.5rem 2rem;
 }
 
 .detail-header {
-  max-width: 1400px;
-  margin: 0 auto 2rem;
+  max-width: 1280px;
+  margin: 0 auto 1.5rem;
 }
 
 .detail-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: bold;
   color: #1F2937;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
 }
 
 .detail-location-header {
@@ -27,30 +28,32 @@
 }
 
 .detail-content-grid {
-  max-width: 1400px;
+  max-width: 1280px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 @media (min-width: 1024px) {
   .detail-content-grid {
-    grid-template-columns: 1.5fr 1fr;
+    grid-template-columns: 1.75fr 1fr;
+    gap: 2rem;
   }
 }
 
 .detail-left {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .section-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 1.375rem;
+  font-weight: 600;
   color: #1F2937;
   margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
 .subsection-title {
@@ -62,24 +65,24 @@
 
 .photos-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .photos-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .gallery-image {
   width: 100%;
-  height: 250px;
+  height: 220px;
   object-fit: cover;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform 0.2s ease;
 }
 
 .gallery-image:hover {
@@ -88,35 +91,37 @@
 
 .description-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .description-text {
   color: #6B7280;
-  line-height: 1.8;
-  margin-bottom: 1rem;
+  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  font-size: 0.9375rem;
 }
 
 .host-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .host-card {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.25rem;
   align-items: center;
 }
 
 .host-avatar img {
-  width: 80px;
-  height: 80px;
-  border-radius: 9999px;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
   border: 3px solid #FF9933;
+  object-fit: cover;
 }
 
 .host-name {
@@ -165,24 +170,25 @@
 
 .features-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .feature-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem;
-  background-color: #F3F4F6;
+  padding: 0.875rem;
+  background-color: #F9FAFB;
   border-radius: 0.5rem;
+  font-size: 0.9375rem;
 }
 
 .feature-item i {
@@ -192,9 +198,9 @@
 
 .sanitation-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .section-title i {
@@ -221,12 +227,12 @@
 .bathroom-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .bathroom-image {
   width: 100%;
-  height: 200px;
+  height: 180px;
   object-fit: cover;
   border-radius: 0.5rem;
 }
@@ -256,17 +262,18 @@
 .detail-right {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
   position: sticky;
-  top: 6rem;
+  top: 5.5rem;
   height: fit-content;
+  align-self: start;
 }
 
 .itinerary-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 .itinerary-subtitle {
@@ -331,10 +338,10 @@
 
 .payment-section {
   background-color: #FFFFFF;
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-  border: 2px solid #FFD9B3;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #FFD9B3;
 }
 
 .price-display {
@@ -459,6 +466,13 @@
 }
 
 @media (max-width: 768px) {
+  .accommodation-detail-page {
+    padding: 5rem 1rem 2rem;
+  }
+
+  .detail-title {
+    font-size: 1.5rem;
+  }
 
   .photos-grid,
   .features-grid,
@@ -468,5 +482,9 @@
 
   .booking-actions {
     grid-template-columns: 1fr;
+  }
+
+  .gallery-image {
+    height: 200px;
   }
 }

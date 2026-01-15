@@ -7,7 +7,7 @@
 
 .back-btn {
   position: fixed;
-  top: 4.5rem;
+  top: 5rem;
   left: 1.5rem;
   z-index: 100;
   background: #FF9933;
@@ -15,14 +15,14 @@
   border: none;
   padding: 0.625rem;
   border-radius: 50%;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   transition: all 0.2s ease;
 }
 
@@ -40,12 +40,12 @@
 .listings-container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 1.75rem;
+  padding: 0 1.5rem;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.75rem;
+  gap: 2rem;
   height: calc(100vh - 5rem);
-  padding-top: 5rem;
+  padding-top: 5.5rem;
 }
 
 /* Desktop: Two-column locked layout */
@@ -84,13 +84,13 @@
 }
 
 .listings-title {
-  font-size: 1.75rem;
+  font-size: 1.625rem;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 0.375rem;
+  margin-bottom: 0.5rem;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .listings-subtitle {
@@ -138,7 +138,7 @@
 
 .listing-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
   flex-shrink: 0;
 }
@@ -416,7 +416,7 @@
     grid-template-columns: 1fr;
     height: auto;
     overflow: visible;
-    padding-top: 6rem;
+    padding-top: 5.5rem;
     padding-bottom: 3rem;
   }
   
@@ -432,7 +432,7 @@
   
   .map-container {
     flex: none;
-    height: 400px;
+    height: 350px;
   }
 }
 
@@ -442,6 +442,15 @@
   }
   
   .listing-image {
-    height: 220px;
+    height: 200px;
+  }
+
+  .listings-container {
+    padding: 5rem 1rem 2rem;
+  }
+
+  .back-btn {
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }
