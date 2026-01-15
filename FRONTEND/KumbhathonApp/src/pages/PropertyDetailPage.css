@@ -1,4 +1,4 @@
-.property-detail-page {
+.accommodation-detail-page {
   min-height: 100vh;
   background-color: #F3F4F6;
   padding: 5rem 1rem 2rem;
@@ -440,6 +440,7 @@
 }
 
 @media (max-width: 768px) {
+
   .photos-grid,
   .features-grid,
   .bathroom-grid {

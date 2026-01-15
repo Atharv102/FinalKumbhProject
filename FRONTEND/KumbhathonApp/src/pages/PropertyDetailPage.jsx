@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import './PropertyDetailPage.css';
+import RatingReviews from '../components/RatingReviews';
 
 const PropertyDetailPage = ({ property, onBack }) => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(1);
+
+  if (!property) {
+    return <div>Loading...</div>;
+  }
 
   const additionalImages = [
     property.image,
@@ -28,10 +33,10 @@ const PropertyDetailPage = ({ property, onBack }) => {
   ];
 
   const itinerary = [
-    { time: "6:00 AM", activity: "Depart from hotel to Ramkund", distance: "2.5 km" },
+    { time: "6:00 AM", activity: `Depart from ${property.type || 'accommodation'} to Ramkund`, distance: "2.5 km" },
     { time: "6:30 AM", activity: "Holy bath at Ramkund", distance: "0 km" },
     { time: "8:00 AM", activity: "Visit Kalaram Temple", distance: "0.5 km" },
-    { time: "10:00 AM", activity: "Return to hotel for breakfast", distance: "2.5 km" },
+    { time: "10:00 AM", activity: `Return to ${property.type || 'accommodation'} for breakfast`, distance: "2.5 km" },
     { time: "12:00 PM", activity: "Visit Panchavati area", distance: "3 km" },
     { time: "4:00 PM", activity: "Evening Aarti at Godavari", distance: "2 km" }
   ];
@@ -43,7 +48,7 @@ const PropertyDetailPage = ({ property, onBack }) => {
   };
 
   return (
-    <div className="property-detail-page">
+    <div className="accommodation-detail-page">
       <button className="back-btn" onClick={onBack}>
         <i className="fas fa-arrow-left"></i> Back
       </button>
@@ -103,6 +108,8 @@ const PropertyDetailPage = ({ property, onBack }) => {
               ))}
             </div>
           </div>
+
+          <RatingReviews />
 
           <div className="sanitation-section">
             <h2 className="section-title">

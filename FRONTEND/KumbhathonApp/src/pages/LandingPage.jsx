@@ -55,12 +55,12 @@ const LandingPage = () => {
   if (currentView === 'detail' && selectedProperty) {
     return (
       <div className="landing-page">
-        <Header 
-          isLoggedIn={isLoggedIn} 
+        <Header
+          isLoggedIn={isLoggedIn}
           onAuthClick={handleAuthClick}
           onLogout={handleLogout}
         />
-        <PropertyDetailPage 
+        <PropertyDetailPage
           property={selectedProperty}
           onBack={handleBackToListings}
         />
@@ -72,12 +72,12 @@ const LandingPage = () => {
   if (currentView === 'listings') {
     return (
       <div className="landing-page">
-        <Header 
-          isLoggedIn={isLoggedIn} 
+        <Header
+          isLoggedIn={isLoggedIn}
           onAuthClick={handleAuthClick}
           onLogout={handleLogout}
         />
-        <CategoryListingsPage 
+        <CategoryListingsPage
           accommodations={accommodations}
           type={selectedCategory}
           onBack={handleBackToLanding}
@@ -90,13 +90,13 @@ const LandingPage = () => {
 
   return (
     <div className="landing-page">
-      <Header 
-        isLoggedIn={isLoggedIn} 
+      <Header
+        isLoggedIn={isLoggedIn}
         onAuthClick={handleAuthClick}
         onLogout={handleLogout}
       />
-      
-      <AuthModal 
+
+      <AuthModal
         isOpen={showAuthModal}
         mode={authMode}
         onClose={() => setShowAuthModal(false)}
@@ -106,43 +106,36 @@ const LandingPage = () => {
 
       <main className="main-content">
         <HeroSection />
-        
+
         <div className="accommodations-section">
           <div className="accommodations-content">
             <div className="section-header">
               <h2 className="section-title">Choose Your Stay Experience</h2>
-              <p className="section-subtitle">
-                From luxury hotels to traditional tents, find accommodation that suits your needs for the sacred Kumbh Mela 2027
-              </p>
             </div>
 
-            <CategoryCarousel 
+            <CategoryCarousel
               title="Hotels"
-              description="Comfortable hotel accommodations with modern amenities near the Kumbh Mela site"
               items={accommodations.hotels}
               onSeeMore={() => handleSeeMore('hotels')}
               onCardClick={handleCardClick}
             />
 
-            <CategoryCarousel 
+            <CategoryCarousel
               title="Homestays"
-              description="Experience authentic Nashik hospitality with local families"
               items={accommodations.homestays}
               onSeeMore={() => handleSeeMore('homestays')}
               onCardClick={handleCardClick}
             />
 
-            <CategoryCarousel 
+            <CategoryCarousel
               title="Tents"
-              description="Traditional tent accommodations for the authentic Kumbh Mela experience"
               items={accommodations.tents}
               onSeeMore={() => handleSeeMore('tents')}
               onCardClick={handleCardClick}
             />
 
-            <CategoryCarousel 
+            <CategoryCarousel
               title="Dormitories"
-              description="Budget-friendly shared accommodations for economical pilgrims"
               items={accommodations.dormitories}
               onSeeMore={() => handleSeeMore('dormitories')}
               onCardClick={handleCardClick}
