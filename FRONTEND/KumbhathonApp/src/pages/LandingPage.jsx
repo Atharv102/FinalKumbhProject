@@ -139,6 +139,14 @@ const LandingPage = () => {
               onSeeMore={() => handleSeeMore('tents')}
               onCardClick={handleCardClick}
             />
+
+            <CategoryCarousel 
+              title="Dormitories"
+              description="Budget-friendly shared accommodations for economical pilgrims"
+              items={accommodations.dormitories}
+              onSeeMore={() => handleSeeMore('dormitories')}
+              onCardClick={handleCardClick}
+            />
           </div>
         </div>
       </main>

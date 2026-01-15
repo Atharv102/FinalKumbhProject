@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Header.css';
 
 const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
+  const [activeNav, setActiveNav] = useState('home');
   const [hoveredNav, setHoveredNav] = useState(null);
 
   const navItems = [
@@ -27,15 +28,15 @@ const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
         
         <nav className="main-nav">
           {navItems.map((item) => (
-            <a 
+            <button 
               key={item.id}
-              href="#" 
-              className={`nav-link ${hoveredNav === item.id ? 'nav-link-hovered' : ''}`}
+              className={`nav-btn ${(hoveredNav === item.id || (activeNav === item.id && hoveredNav === null)) ? 'nav-btn-active' : ''}`}
+              onClick={() => setActiveNav(item.id)}
               onMouseEnter={() => setHoveredNav(item.id)}
               onMouseLeave={() => setHoveredNav(null)}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
         

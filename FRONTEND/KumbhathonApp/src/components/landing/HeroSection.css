@@ -19,6 +19,7 @@
   overflow: hidden;
   position: relative;
   background: #F3F4F6;
+  margin-bottom: 0.5rem;
 }
 
 .slider-track {
