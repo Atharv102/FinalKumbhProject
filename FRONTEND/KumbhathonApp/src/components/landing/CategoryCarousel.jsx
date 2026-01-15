@@ -10,16 +10,19 @@ const CategoryCarousel = ({ title, description, items, onSeeMore, onCardClick })
           <h3 className="category-title">{title}</h3>
           <p className="category-description">{description}</p>
         </div>
+        {items.length > 5 && (
+          <button className="see-all-arrow" onClick={onSeeMore}>
+            <i className="fas fa-arrow-right"></i>
+          </button>
+        )}
       </div>
       
       <div className="category-carousel">
-        {items.slice(0, 5).map((item, index) => (
+        {items.slice(0, 5).map((item) => (
           <AccommodationCard 
             key={item.id} 
             accommodation={item} 
             onClick={() => onCardClick(item)}
-            isLast={index === 4}
-            onSeeMore={items.length > 5 ? onSeeMore : null}
           />
         ))}
       </div>

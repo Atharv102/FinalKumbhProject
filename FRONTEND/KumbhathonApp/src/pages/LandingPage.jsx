@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
-import AuthModal from '../components/common/AuthModal';
+import LoginPage from './LoginPage';
+import SignUpPage from './SignUpPage';
 import HeroSection from '../components/landing/HeroSection';
 import CategoryCarousel from '../components/landing/CategoryCarousel';
 import CategoryListingsPage from './CategoryListingsPage';
@@ -11,21 +12,20 @@ import './LandingPage.css';
 
 const LandingPage = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showAuth, setShowAuth] = useState(false);
   const [authMode, setAuthMode] = useState('login');
-  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'listings', 'detail'
+  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'listings', 'detail', 'login', 'signup'
   const [selectedCategory, setSelectedCategory] = useState('hotels');
   const [selectedProperty, setSelectedProperty] = useState(null);
 
   const handleAuthClick = (mode) => {
     setAuthMode(mode);
-    setShowAuthModal(true);
+    setCurrentView(mode);
   };
 
-  const handleAuthSubmit = (e) => {
-    e.preventDefault();
+  const handleAuthSuccess = () => {
     setIsLoggedIn(true);
-    setShowAuthModal(false);
+    setCurrentView('landing');
   };
 
   const handleLogout = () => {
@@ -51,6 +51,26 @@ const LandingPage = () => {
     setCurrentView('listings');
     setSelectedProperty(null);
   };
+
+  // Show Login Page
+  if (currentView === 'login') {
+    return (
+      <LoginPage 
+        onClose={() => setCurrentView('landing')}
+        onSwitchToSignup={() => setCurrentView('signup')}
+      />
+    );
+  }
+
+  // Show Sign Up Page
+  if (currentView === 'signup') {
+    return (
+      <SignUpPage 
+        onClose={() => setCurrentView('landing')}
+        onSwitchToLogin={() => setCurrentView('login')}
+      />
+    );
+  }
 
   if (currentView === 'detail' && selectedProperty) {
     return (
@@ -95,15 +115,7 @@ const LandingPage = () => {
         onAuthClick={handleAuthClick}
         onLogout={handleLogout}
       />
-
-      <AuthModal
-        isOpen={showAuthModal}
-        mode={authMode}
-        onClose={() => setShowAuthModal(false)}
-        onToggleMode={() => setAuthMode(authMode === 'login' ? 'signup' : 'login')}
-        onSubmit={handleAuthSubmit}
-      />
-
+      
       <main className="main-content">
         <HeroSection />
 

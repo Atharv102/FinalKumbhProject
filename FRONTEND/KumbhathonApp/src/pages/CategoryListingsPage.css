@@ -7,32 +7,33 @@
 
 .back-btn {
   position: fixed;
-  top: 5.5rem;
-  left: 2rem;
+  top: 4.5rem;
+  left: 1.5rem;
   z-index: 100;
   background: #FF9933;
   color: white;
   border: none;
-  padding: 0.625rem 1.25rem;
-  border-radius: 0.5rem;
-  font-size: 0.9375rem;
-  font-weight: 600;
+  padding: 0.625rem;
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.2s ease;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .back-btn:hover {
   background: #E68A00;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: scale(1.05);
 }
 
 .back-btn i {
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 /* Main container: tighter spacing for density */
@@ -257,12 +258,12 @@
   display: block;
 }
 
-/* AI Planner: reduced padding, tighter form */
+/* AI Planner: professional, trustworthy design */
 .ai-planner-container {
   background: #FFFFFF;
-  padding: 0.875rem;
-  border-radius: 0.625rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 1.125rem 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
   border: 1px solid #E5E7EB;
   flex: 1;
   display: flex;
@@ -271,75 +272,90 @@
   overflow: hidden;
 }
 
+/* Header: clear hierarchy */
 .ai-planner-container .section-heading {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.375rem;
+  letter-spacing: -0.01em;
 }
 
 .ai-planner-container .section-heading i {
   color: #FF9933;
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
+/* Subtitle: lighter, secondary */
 .planner-description {
   color: #6B7280;
-  font-size: 0.75rem;
-  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+  margin-bottom: 1rem;
   line-height: 1.4;
   font-weight: 400;
   flex-shrink: 0;
 }
 
-/* Form fields tighter */
+/* Form: compact, solid, reliable */
 .planner-form {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
+  gap: 0.875rem;
+  margin-bottom: 0.875rem;
   flex-shrink: 0;
 }
 
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 0.3125rem;
+  gap: 0.375rem;
 }
 
+/* Labels: clear, above inputs */
 .form-label {
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: #374151;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
+/* Inputs: solid, calm, consistent */
 .planner-input {
-  padding: 0.5rem 0.625rem;
+  padding: 0.5625rem 0.75rem;
   border: 1px solid #D1D5DB;
   border-radius: 0.375rem;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   background-color: #FFFFFF;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #111827;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
   line-height: 1.4;
+  height: 2.375rem;
 }
 
 .planner-input:focus {
   outline: none;
   border-color: #FF9933;
-  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.08);
 }
 
+.planner-input::placeholder {
+  color: #9CA3AF;
+}
+
+/* CTA: confident, not loud */
 .planner-btn {
-  padding: 0.625rem 0.75rem;
+  padding: 0.625rem 1rem;
   background-color: #FF9933;
   color: #FFFFFF;
   border: none;
   border-radius: 0.375rem;
-  font-weight: 600;
-  font-size: 0.8125rem;
+  font-weight: 500;
+  font-size: 0.875rem;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -349,6 +365,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   line-height: 1;
+  height: 2.375rem;
 }
 
 .planner-btn:hover {
@@ -359,11 +376,12 @@
   transform: translateY(1px);
 }
 
+/* Output: smart zone, reassuring */
 .planner-output {
   background-color: #F9FAFB;
-  padding: 0.75rem;
+  padding: 0.875rem 1rem;
   border-radius: 0.375rem;
-  min-height: 60px;
+  min-height: 5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -375,17 +393,17 @@
 .planner-placeholder {
   color: #9CA3AF;
   text-align: center;
-  font-size: 0.75rem;
+  font-size: 0.8125rem;
   display: flex;
   align-items: center;
-  gap: 0.375rem;
+  gap: 0.5rem;
   font-weight: 400;
   line-height: 1.4;
 }
 
 .planner-placeholder i {
   color: #D1D5DB;
-  font-size: 1rem;
+  font-size: 0.9375rem;
 }
 
 /* Responsive: Tablet & Mobile */

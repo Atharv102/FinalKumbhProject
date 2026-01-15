@@ -8,7 +8,7 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
   return (
     <div className="category-listings-page">
       <button className="back-btn" onClick={onBack}>
-        <i className="fas fa-arrow-left"></i> Back
+        <i className="fas fa-arrow-left"></i>
       </button>
 
       <div className="listings-container">
@@ -48,6 +48,7 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
+              //title="Nashik Map"
             ></iframe>
           </div>
 
