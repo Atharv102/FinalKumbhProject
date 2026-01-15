@@ -7,29 +7,45 @@
 
 .back-btn {
   position: fixed;
-  top: 5rem;
+  top: 4.5rem;
   left: 1.5rem;
   z-index: 100;
   background: #FF9933;
   color: white;
   border: none;
-  padding: 0.625rem;
+  padding: 0;
   border-radius: 50%;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   font-size: 1rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+}
+
+.back-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-20px);
+}
+
+.back-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
 }
 
 .back-btn:hover {
   background: #E68A00;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
+}
+
+.back-btn.hidden:hover {
+  transform: translateX(-20px);
 }
 
 .back-btn i {
