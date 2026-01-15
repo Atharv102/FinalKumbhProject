@@ -1,0 +1,187 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: #FFFFFF;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.header-content {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-circle {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #FF9933;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-text {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.logo-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #FF9933;
+  line-height: 1;
+}
+
+.logo-subtitle {
+  font-size: 0.75rem;
+  color: #6B7280;
+  margin-top: -0.25rem;
+}
+
+.main-nav {
+  display: none;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .main-nav {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link-hovered {
+  color: #FF9933;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.signup-btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #FF9933;
+  color: #FF9933;
+  border-radius: 9999px;
+  background: transparent;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.signup-btn:hover {
+  background-color: #FFD9B3;
+}
+
+.login-btn {
+  padding: 0.5rem 1rem;
+  background-color: #FF9933;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #E68A00;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.profile-info {
+  text-align: right;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .profile-info {
+    display: block;
+  }
+}
+
+.profile-name {
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.profile-role {
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+.profile-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #FFD9B3;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-icon:hover {
+  background-color: #FF9933;
+}
+
+.profile-initials {
+  color: #FF9933;
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+}
+
+.profile-icon:hover .profile-initials {
+  color: #FFFFFF;
+}
+
+.logout-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  border-color: #FF9933;
+  color: #FF9933;
+}

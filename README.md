@@ -1,2 +1,136 @@
-# Kumbhthon
-Kumbhathon 2026 prototype work....here
+# Kumbhathon 2027 - Complete Project
+
+## 🏆 Trustworthy Stays & Accommodation Experience
+
+A full-stack accommodation booking platform for Kumbh Mela 2027, Nashik.
+
+---
+
+## 📁 Project Structure
+
+```
+Kumbhathon/
+├── FRONTEND/
+│   └── KumbhathonApp/          # Main React Application
+│       ├── src/
+│       │   ├── components/     # Reusable components
+│       │   ├── pages/          # Page components
+│       │   └── data/           # Mock data
+│       ├── README.md           # Frontend documentation
+│       └── package.json
+│
+└── BACKEND/                    # Backend API (if applicable)
+```
+
+---
+
+## 🚀 Quick Start
+
+### Frontend Setup
+
+```bash
+# Navigate to frontend
+cd FRONTEND/KumbhathonApp
+
+# Install dependencies
+npm install
+
+# Run development server
+npm run dev
+
+# Open browser
+http://localhost:5173
+```
+
+### Backend Setup (if applicable)
+
+```bash
+# Navigate to backend
+cd BACKEND
+
+# Follow backend-specific instructions
+```
+
+---
+
+## ✨ Features
+
+### 🏠 **Landing Page**
+- Hero section with scrolling images
+- Smart search bar (Location, Dates, Guests)
+- Three accommodation categories (Hotels, Homestays, Tents)
+- Horizontal scrolling carousels
+- Login/Signup authentication
+
+### 📋 **Category Listings Page**
+- Grid view of all accommodations
+- Google Maps integration
+- AI Itinerary Planner
+- Filter and sort options
+
+### 🏨 **Property Detail Page**
+- Photo gallery
+- Host information with verification
+- Amenities and features
+- Sanitation badges
+- Suggested itinerary with timeline
+- Booking form with price calculation
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+- **Framework**: React 19.2.0
+- **Build Tool**: Vite 7.2.4
+- **Styling**: Pure CSS (Modular)
+- **Icons**: Font Awesome 6.4.0
+
+### Backend (if applicable)
+- Add your backend tech stack here
+
+---
+
+## 👥 Team
+
+- **Frontend Development**: Landing Page, Components, UI/UX
+- **Frontend Development**: Listings & Detail Pages
+- **Backend Development**: (if applicable)
+
+---
+
+## 📖 Documentation
+
+- **Frontend README**: `FRONTEND/KumbhathonApp/README.md`
+- **Quick Start Guide**: `FRONTEND/KumbhathonApp/QUICKSTART.md`
+- **Backend README**: `BACKEND/README.md` (if applicable)
+
+---
+
+## 🎯 Problem Statement
+
+**ID: 09 - Trustworthy Stays & Accommodation Experience**
+
+Addressing critical challenges:
+- ✅ Trust and safety in accommodation
+- ✅ Transparent pricing and information
+- ✅ Logistical uncertainty for pilgrims
+- ✅ Easy access to verified properties
+
+---
+
+## 📞 Contact
+
+For queries:
+- Email: support@kumbhathon2027.com
+- Phone: +91 1800 123 4567
+
+---
+
+## 📄 License
+
+Created for Kumbhathon Hackathon 2027
+
+---
+
+**Built with ❤️ for Kumbh Mela 2027, Nashik**
