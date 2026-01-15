@@ -1,18 +1,41 @@
 import React, { useState } from 'react';
 import './AuthPages.css';
+import { authAPI } from '../services/api';
 
-const LoginPage = ({ onClose, onSwitchToSignup }) => {
+const LoginPage = ({ onClose, onSwitchToSignup, onSuccess }) => {
   const [userType, setUserType] = useState('customer');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
-    mobile: '',
-    email: '',
+    emailOrMobile: '',
     password: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login:', { userType, ...formData });
-    onClose();
+    setLoading(true);
+    setError('');
+
+    try {
+      const credentials = {
+        email: formData.emailOrMobile,
+        password: formData.password
+      };
+
+      const response = await authAPI.login(credentials);
+      console.log('Login successful:', response);
+      
+      // Close modal and update parent state
+      onClose();
+      if (onSuccess) onSuccess();
+      
+      // Force header to update by triggering a re-render
+      window.dispatchEvent(new Event('auth-change'));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,14 +81,21 @@ const LoginPage = ({ onClose, onSwitchToSignup }) => {
             </div>
 
             <form className="auth-form-main" onSubmit={handleSubmit}>
+              {error && (
+                <div className="auth-error">
+                  <i className="fas fa-exclamation-circle"></i>
+                  {error}
+                </div>
+              )}
+              
               <div className="auth-input-group">
-                <label className="auth-label">Mobile Number</label>
+                <label className="auth-label">Email or Mobile Number</label>
                 <input
-                  type="tel"
+                  type="text"
                   className="auth-input"
-                  placeholder="Enter mobile number"
-                  value={formData.mobile}
-                  onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                  placeholder="Enter your email or mobile number"
+                  value={formData.emailOrMobile}
+                  onChange={(e) => setFormData({...formData, emailOrMobile: e.target.value})}
                   required
                 />
               </div>
@@ -82,8 +112,15 @@ const LoginPage = ({ onClose, onSwitchToSignup }) => {
                 />
               </div>
 
-              <button type="submit" className="auth-submit-btn">
-                Sign In as {userType === 'customer' ? 'Customer' : 'Host'}
+              <button type="submit" className="auth-submit-btn" disabled={loading}>
+                {loading ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin"></i>
+                    Signing In...
+                  </>
+                ) : (
+                  `Sign In as ${userType === 'customer' ? 'Customer' : 'Host'}`
+                )}
               </button>
             </form>
 

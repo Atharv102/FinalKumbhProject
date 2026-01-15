@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import './HeroSection.css';
 
-const HeroSection = () => {
+const HeroSection = ({ onSearch }) => {
   const kumbhImages = [
     "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
     "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
@@ -24,7 +24,7 @@ const HeroSection = () => {
           ))}
         </div>
       </div>
-      <SearchBar />
+      <SearchBar onSearch={onSearch} />
     </div>
   );
 };

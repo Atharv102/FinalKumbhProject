@@ -13,14 +13,25 @@ const generateToken = (id) => {
 // @access  Public
 exports.register = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, mobile, password, role } = req.body;
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+    // Check if user exists by email or mobile
+    const existingUser = await User.findOne({
+      $or: [
+        { email: email },
+        { phone: mobile }
+      ]
+    });
+    
+    if (existingUser) {
+      return res.status(400).json({ message: 'User already exists with this email or mobile number' });
     }
 
-    const user = await User.create({ name, email, password, role });
+    const userData = { name, password, role };
+    if (email) userData.email = email;
+    if (mobile) userData.phone = mobile;
+
+    const user = await User.create(userData);
 
     const token = generateToken(user._id);
 
@@ -31,6 +42,7 @@ exports.register = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role
       }
     });
@@ -47,10 +59,14 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ message: 'Please provide email and password' });
+      return res.status(400).json({ message: 'Please provide email/mobile and password' });
     }
 
-    const user = await User.findOne({ email }).select('+password');
+    // Check if login is with email or mobile number
+    const isEmail = email.includes('@');
+    const query = isEmail ? { email } : { phone: email };
+    
+    const user = await User.findOne(query).select('+password');
 
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ message: 'Invalid credentials' });
@@ -65,6 +81,7 @@ exports.login = async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role
       }
     });

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch }) => {
   const [searchData, setSearchData] = useState({
     location: 'Nashik, Maharashtra',
     checkIn: '',
@@ -10,7 +10,20 @@ const SearchBar = () => {
   });
 
   const handleSearch = () => {
-    console.log('Search data:', searchData);
+    if (onSearch) {
+      onSearch({
+        search: searchData.location,
+        guests: searchData.guests,
+        checkIn: searchData.checkIn,
+        checkOut: searchData.checkOut
+      });
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -25,6 +38,7 @@ const SearchBar = () => {
                 id="location"
                 value={searchData.location}
                 onChange={(e) => setSearchData({ ...searchData, location: e.target.value })}
+                onKeyPress={handleKeyPress}
                 placeholder=" "
                 autoFocus
               />

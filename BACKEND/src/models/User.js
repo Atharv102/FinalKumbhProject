@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, 'Please provide an email'],
     unique: true,
+    sparse: true,
     lowercase: true,
     match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email']
   },
@@ -26,7 +26,10 @@ const userSchema = new mongoose.Schema({
     default: 'user'
   },
   phone: {
-    type: String
+    type: String,
+    unique: true,
+    sparse: true,
+    match: [/^[0-9]{10}$/, 'Please provide a valid 10-digit phone number']
   },
   isVerified: {
     type: Boolean,

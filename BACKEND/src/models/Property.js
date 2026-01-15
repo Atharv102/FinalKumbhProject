@@ -1,66 +1,99 @@
 const mongoose = require('mongoose');
 
 const propertySchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
-    required: [true, 'Property name is required'],
+    required: [true, 'Please provide a property title'],
     trim: true
-  },
-  type: {
-    type: String,
-    enum: ['hotel', 'homestay', 'tent'],
-    required: true
   },
   description: {
     type: String,
-    required: [true, 'Description is required']
+    required: [true, 'Please provide a description']
   },
-  price: {
-    type: Number,
-    required: [true, 'Price is required']
+  type: {
+    type: String,
+    required: [true, 'Please specify property type'],
+    enum: ['hotel', 'homestay', 'tent', 'dormitory']
   },
   location: {
-    address: String,
-    city: { type: String, default: 'Nashik' },
-    state: { type: String, default: 'Maharashtra' },
+    address: {
+      type: String,
+      required: [true, 'Please provide address']
+    },
+    city: {
+      type: String,
+      required: [true, 'Please provide city']
+    },
+    state: {
+      type: String,
+      required: [true, 'Please provide state']
+    },
     coordinates: {
       lat: Number,
       lng: Number
     }
   },
-  amenities: [String],
-  images: [String],
-  capacity: {
-    type: Number,
-    required: true
+  pricing: {
+    basePrice: {
+      type: Number,
+      required: [true, 'Please provide base price']
+    },
+    currency: {
+      type: String,
+      default: 'INR'
+    }
   },
+  capacity: {
+    maxGuests: {
+      type: Number,
+      required: [true, 'Please specify maximum guests'],
+      min: 1
+    },
+    bedrooms: Number,
+    bathrooms: Number
+  },
+  amenities: [{
+    type: String,
+    enum: ['wifi', 'parking', 'kitchen', 'ac', 'tv', 'pool', 'gym', 'spa', 'restaurant', 'laundry']
+  }],
+  images: [{
+    url: String,
+    caption: String
+  }],
   host: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
-  rating: {
-    type: Number,
-    default: 0,
-    min: 0,
-    max: 5
+  status: {
+    type: String,
+    enum: ['active', 'inactive', 'pending'],
+    default: 'active'
   },
-  reviewCount: {
-    type: Number,
-    default: 0
-  },
-  isVerified: {
-    type: Boolean,
-    default: false
-  },
-  availability: {
-    type: Boolean,
-    default: true
+  ratings: {
+    average: {
+      type: Number,
+      default: 0
+    },
+    count: {
+      type: Number,
+      default: 0
+    }
   },
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
   }
+});
+
+// Update the updatedAt field before saving
+propertySchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
 });
 
 module.exports = mongoose.model('Property', propertySchema);

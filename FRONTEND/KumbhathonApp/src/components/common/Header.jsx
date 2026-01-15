@@ -1,9 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
+import { authAPI } from '../../services/api';
 
 const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
   const [activeNav, setActiveNav] = useState('home');
   const [hoveredNav, setHoveredNav] = useState(null);
+  const [user, setUser] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    // Check authentication status on component mount
+    const checkAuth = () => {
+      const authenticated = authAPI.isAuthenticated();
+      const userData = authAPI.getCurrentUser();
+      setIsAuthenticated(authenticated);
+      setUser(userData);
+    };
+
+    checkAuth();
+
+    // Listen for auth changes
+    const handleAuthChange = () => {
+      checkAuth();
+    };
+
+    window.addEventListener('auth-change', handleAuthChange);
+    
+    return () => {
+      window.removeEventListener('auth-change', handleAuthChange);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    authAPI.logout();
+    setIsAuthenticated(false);
+    setUser(null);
+    if (onLogout) onLogout();
+    window.location.reload();
+  };
+
+  const getInitials = (name) => {
+    if (!name) return 'U';
+    return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+  };
+
+  const getRoleDisplay = (role) => {
+    switch(role) {
+      case 'host': return 'Host';
+      case 'admin': return 'Admin';
+      default: return 'Pilgrim';
+    }
+  };
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -41,21 +88,30 @@ const Header = ({ isLoggedIn, onAuthClick, onLogout }) => {
         </nav>
         
         <div className="auth-section">
-          {!isLoggedIn ? (
+          {!isAuthenticated ? (
             <>
               <button onClick={() => onAuthClick('signup')} className="signup-btn">Sign Up</button>
               <button onClick={() => onAuthClick('login')} className="login-btn">Login</button>
             </>
           ) : (
             <div className="profile-container">
+              {user?.role === 'host' && (
+                <a href="#dashboard" className="dashboard-link">
+                  <i className="fas fa-tachometer-alt"></i>
+                  Dashboard
+                </a>
+              )}
               <div className="profile-info">
-                <p className="profile-name">Harish Patel</p>
-                <p className="profile-role">Pilgrim</p>
+                <p className="profile-name">{user?.name || 'User'}</p>
+                <p className="profile-role">{getRoleDisplay(user?.role)}</p>
               </div>
               <div className="profile-icon">
-                <span className="profile-initials">HP</span>
+                <span className="profile-initials">{getInitials(user?.name)}</span>
               </div>
-              <button onClick={onLogout} className="logout-btn">Logout</button>
+              <button onClick={handleLogout} className="logout-btn">
+                <i className="fas fa-sign-out-alt"></i>
+                Logout
+              </button>
             </div>
           )}
         </div>

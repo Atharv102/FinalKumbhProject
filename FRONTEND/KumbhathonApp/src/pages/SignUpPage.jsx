@@ -1,24 +1,63 @@
 import React, { useState } from 'react';
 import './AuthPages.css';
+import { authAPI } from '../services/api';
 
-const SignUpPage = ({ onClose, onSwitchToLogin }) => {
+const SignUpPage = ({ onClose, onSwitchToLogin, onSuccess }) => {
   const [userType, setUserType] = useState('customer');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
     firstName: '',
     middleName: '',
     surname: '',
     mobile: '',
     email: '',
+    password: '',
     propertyName: '',
     location: '',
     shelterType: '',
     aadhar: ''
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Sign Up:', { userType, ...formData });
-    onClose();
+    setLoading(true);
+    setError('');
+
+    try {
+      // Prepare data based on user type
+      const userData = {
+        role: userType === 'customer' ? 'user' : 'host',
+        mobile: formData.mobile,
+        email: formData.email,
+        password: formData.password
+      };
+
+      if (userType === 'customer') {
+        userData.name = `${formData.firstName} ${formData.middleName} ${formData.surname}`.trim();
+      } else {
+        userData.name = formData.propertyName;
+        userData.propertyDetails = {
+          location: formData.location,
+          type: formData.shelterType,
+          aadhar: formData.aadhar
+        };
+      }
+
+      const response = await authAPI.register(userData);
+      console.log('Registration successful:', response);
+      
+      // Close modal and update parent state
+      onClose();
+      if (onSuccess) onSuccess();
+      
+      // Force header to update
+      window.dispatchEvent(new Event('auth-change'));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -64,6 +103,13 @@ const SignUpPage = ({ onClose, onSwitchToLogin }) => {
             </div>
 
             <form className="auth-form-main" onSubmit={handleSubmit}>
+              {error && (
+                <div className="auth-error">
+                  <i className="fas fa-exclamation-circle"></i>
+                  {error}
+                </div>
+              )}
+              
               {userType === 'customer' ? (
                 // Customer Form
                 <>
@@ -122,6 +168,19 @@ const SignUpPage = ({ onClose, onSwitchToLogin }) => {
                       placeholder="your.email@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Password</label>
+                    <input
+                      type="password"
+                      className="auth-input"
+                      placeholder="Create a password"
+                      value={formData.password}
+                      onChange={(e) => setFormData({...formData, password: e.target.value})}
+                      required
+                      minLength="6"
                     />
                   </div>
                 </>
@@ -205,11 +264,31 @@ const SignUpPage = ({ onClose, onSwitchToLogin }) => {
                       required
                     />
                   </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Password</label>
+                    <input
+                      type="password"
+                      className="auth-input"
+                      placeholder="Create a password"
+                      value={formData.password}
+                      onChange={(e) => setFormData({...formData, password: e.target.value})}
+                      required
+                      minLength="6"
+                    />
+                  </div>
                 </>
               )}
 
-              <button type="submit" className="auth-submit-btn">
-                Sign Up as {userType === 'customer' ? 'Customer' : 'Host'}
+              <button type="submit" className="auth-submit-btn" disabled={loading}>
+                {loading ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin"></i>
+                    Creating Account...
+                  </>
+                ) : (
+                  `Sign Up as ${userType === 'customer' ? 'Customer' : 'Host'}`
+                )}
               </button>
             </form>
 

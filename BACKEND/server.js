@@ -15,13 +15,14 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000', process.env.FRONTEND_URL],
   credentials: true
 }));
 
 // Routes
 app.use('/api/auth', require('./src/routes/authRoutes'));
 app.use('/api/properties', require('./src/routes/propertyRoutes'));
+app.use('/api/photos', require('./src/routes/photoRoutes'));
 app.use('/api/bookings', require('./src/routes/bookingRoutes'));
 
 // Health check
