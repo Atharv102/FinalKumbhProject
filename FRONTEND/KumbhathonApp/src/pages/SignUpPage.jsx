@@ -2,16 +2,22 @@ import React, { useState } from 'react';
 import './AuthPages.css';
 
 const SignUpPage = ({ onClose, onSwitchToLogin }) => {
+  const [userType, setUserType] = useState('customer');
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    middleName: '',
+    surname: '',
+    mobile: '',
     email: '',
-    password: '',
-    confirmPassword: ''
+    propertyName: '',
+    location: '',
+    shelterType: '',
+    aadhar: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign Up:', formData);
+    console.log('Sign Up:', { userType, ...formData });
     onClose();
   };
 
@@ -39,57 +45,171 @@ const SignUpPage = ({ onClose, onSwitchToLogin }) => {
               <p className="auth-form-subtitle">Start your journey with us</p>
             </div>
 
+            {/* Role Selection */}
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-btn ${userType === 'customer' ? 'active' : ''}`}
+                onClick={() => setUserType('customer')}
+              >
+                <i className="fas fa-user"></i> Customer
+              </button>
+              <button
+                type="button"
+                className={`role-btn ${userType === 'host' ? 'active' : ''}`}
+                onClick={() => setUserType('host')}
+              >
+                <i className="fas fa-home"></i> Host/Owner
+              </button>
+            </div>
+
             <form className="auth-form-main" onSubmit={handleSubmit}>
-              <div className="auth-input-group">
-                <label className="auth-label">Full Name</label>
-                <input
-                  type="text"
-                  className="auth-input"
-                  placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({...formData, name: e.target.value})}
-                  required
-                />
-              </div>
+              {userType === 'customer' ? (
+                // Customer Form
+                <>
+                  <div className="auth-input-group">
+                    <label className="auth-label">First Name</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter first name"
+                      value={formData.firstName}
+                      onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                      required
+                    />
+                  </div>
 
-              <div className="auth-input-group">
-                <label className="auth-label">Email</label>
-                <input
-                  type="email"
-                  className="auth-input"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  required
-                />
-              </div>
+                  <div className="auth-input-group">
+                    <label className="auth-label">Middle Name</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter middle name"
+                      value={formData.middleName}
+                      onChange={(e) => setFormData({...formData, middleName: e.target.value})}
+                    />
+                  </div>
 
-              <div className="auth-input-group">
-                <label className="auth-label">Password</label>
-                <input
-                  type="password"
-                  className="auth-input"
-                  placeholder="Create password"
-                  value={formData.password}
-                  onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  required
-                />
-              </div>
+                  <div className="auth-input-group">
+                    <label className="auth-label">Surname</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter surname"
+                      value={formData.surname}
+                      onChange={(e) => setFormData({...formData, surname: e.target.value})}
+                      required
+                    />
+                  </div>
 
-              <div className="auth-input-group">
-                <label className="auth-label">Confirm Password</label>
-                <input
-                  type="password"
-                  className="auth-input"
-                  placeholder="Re-enter password"
-                  value={formData.confirmPassword}
-                  onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                  required
-                />
-              </div>
+                  <div className="auth-input-group">
+                    <label className="auth-label">Mobile Number</label>
+                    <input
+                      type="tel"
+                      className="auth-input"
+                      placeholder="Enter mobile number"
+                      value={formData.mobile}
+                      onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Email (Optional)</label>
+                    <input
+                      type="email"
+                      className="auth-input"
+                      placeholder="your.email@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                  </div>
+                </>
+              ) : (
+                // Host/Owner Form
+                <>
+                  <div className="auth-input-group">
+                    <label className="auth-label">Property Name</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter property name"
+                      value={formData.propertyName}
+                      onChange={(e) => setFormData({...formData, propertyName: e.target.value})}
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Location</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter property location"
+                      value={formData.location}
+                      onChange={(e) => setFormData({...formData, location: e.target.value})}
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Shelter Type</label>
+                    <select
+                      className="auth-input"
+                      value={formData.shelterType}
+                      onChange={(e) => setFormData({...formData, shelterType: e.target.value})}
+                      required
+                    >
+                      <option value="">Select shelter type</option>
+                      <option value="hotel">Hotel</option>
+                      <option value="homestay">Homestay</option>
+                      <option value="tent">Tent</option>
+                      <option value="dormitory">Dormitory</option>
+                    </select>
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Aadhar Number (Verification)</label>
+                    <input
+                      type="text"
+                      className="auth-input"
+                      placeholder="Enter 12-digit Aadhar number"
+                      value={formData.aadhar}
+                      onChange={(e) => setFormData({...formData, aadhar: e.target.value})}
+                      maxLength="12"
+                      pattern="[0-9]{12}"
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Mobile Number</label>
+                    <input
+                      type="tel"
+                      className="auth-input"
+                      placeholder="Enter mobile number"
+                      value={formData.mobile}
+                      onChange={(e) => setFormData({...formData, mobile: e.target.value})}
+                      required
+                    />
+                  </div>
+
+                  <div className="auth-input-group">
+                    <label className="auth-label">Email</label>
+                    <input
+                      type="email"
+                      className="auth-input"
+                      placeholder="your.email@example.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      required
+                    />
+                  </div>
+                </>
+              )}
 
               <button type="submit" className="auth-submit-btn">
-                Create Account
+                Sign Up as {userType === 'customer' ? 'Customer' : 'Host'}
               </button>
             </form>
 

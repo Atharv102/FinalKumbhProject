@@ -4,23 +4,23 @@
 }
 
 .hero-title {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 2.5rem;
+  font-weight: 700;
   color: #1F2937;
   text-align: center;
-  padding: 1rem 1rem 2rem;
+  padding: 1.5rem 1rem 1.75rem;
   max-width: 1280px;
   margin: 0 auto;
+  line-height: 1.2;
 }
 
 .hero-image-slider {
-  height: 16rem;
+  height: 18rem;
   width: 100%;
   overflow: hidden;
   position: relative;
   background: #F3F4F6;
-  margin-bottom: 0.5rem;
-  margin: 0rem 0rem 2rem;
+  margin: 0 0 2rem;
 }
 
 .slider-track {
@@ -29,8 +29,8 @@
 }
 
 .slide {
-  flex: 0 0 400px;
-  height: 16rem;
+  flex: 0 0 420px;
+  height: 18rem;
   margin-right: 1rem;
 }
 
@@ -53,10 +53,16 @@
 
 @media (max-width: 768px) {
   .hero-title {
-    font-size: 2.25rem;
+    font-size: 1.875rem;
+    padding: 1.25rem 1rem 1.5rem;
+  }
+
+  .hero-image-slider {
+    height: 14rem;
   }
 
   .slide {
-    flex: 0 0 300px;
+    flex: 0 0 280px;
+    height: 14rem;
   }
 }

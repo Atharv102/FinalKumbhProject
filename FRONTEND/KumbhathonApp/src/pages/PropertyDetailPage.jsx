@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PropertyDetailPage.css';
 import RatingReviews from '../components/RatingReviews';
 
@@ -6,6 +6,18 @@ const PropertyDetailPage = ({ property, onBack }) => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [guests, setGuests] = useState(1);
+  const [showBackBtn, setShowBackBtn] = useState(true);
+
+  useEffect(() => {
+    let lastScroll = 0;
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset;
+      setShowBackBtn(currentScroll <= lastScroll || currentScroll < 100);
+      lastScroll = currentScroll;
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   if (!property) {
     return <div>Loading...</div>;
@@ -49,21 +61,17 @@ const PropertyDetailPage = ({ property, onBack }) => {
 
   return (
     <div className="accommodation-detail-page">
-      <button className="back-btn" onClick={onBack}>
-        <i className="fas fa-arrow-left"></i> Back
+      <button className={`back-btn ${showBackBtn ? 'visible' : 'hidden'}`} onClick={onBack}>
+        <i className="fas fa-arrow-left"></i>
       </button>
-
-      <div className="detail-header">
-        <h1 className="detail-title">{property.name}</h1>
-        <p className="detail-location-header">
-          <i className="fas fa-map-marker-alt"></i> {property.location}
-        </p>
-      </div>
 
       <div className="detail-content-grid">
         <div className="detail-left">
           <div className="photos-section">
-            <h2 className="section-title">Property Photos</h2>
+            <h2 className="section-title">{property.name}</h2>
+            <p className="property-location">
+              <i className="fas fa-map-marker-alt"></i> {property.location}
+            </p>
             <div className="photos-grid">
               {additionalImages.map((img, idx) => (
                 <img key={idx} src={img} alt={`Property ${idx + 1}`} className="gallery-image" />
@@ -78,22 +86,8 @@ const PropertyDetailPage = ({ property, onBack }) => {
               Located in the heart of Nashik, this property offers easy access to all major Kumbh Mela sites.
               Experience comfort and spirituality combined with modern amenities and traditional hospitality.
             </p>
-          </div>
-          {/* Map Section */}
-          <div className="map-container">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60196.15!2d73.7898!3d19.9975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb9d3a8b2d43%3A0x4f8f8f8f8f8f8f8f!2sNashik%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-            //title="Nashik Map"
-            ></iframe>
-          </div>
 
-          <div className="host-section">
-            <h2 className="section-title">Hosted by</h2>
+            <h2 className="section-title" style={{marginTop: '1.5rem'}}>Hosted by</h2>
             <div className="host-card">
               <div className="host-avatar">
                 <img src="https://i.pravatar.cc/150?img=12" alt="Host" />
@@ -121,11 +115,6 @@ const PropertyDetailPage = ({ property, onBack }) => {
             </div>
           </div>
 
-          <RatingReviews />
-
-
-
-
           <div className="sanitation-section">
             <h2 className="section-title">
               <i className="fas fa-check-circle"></i> Sanitation & Hygiene
@@ -145,7 +134,7 @@ const PropertyDetailPage = ({ property, onBack }) => {
             </div>
           </div>
 
-
+          <RatingReviews />
 
           <button className="host-connect-btn">
             <i className="fas fa-comments"></i> Connect with Host
@@ -153,6 +142,20 @@ const PropertyDetailPage = ({ property, onBack }) => {
         </div>
 
         <div className="detail-right">
+          <div className="map-section">
+            <h3 className="map-title section-title">You Will be here</h3>
+            <div className="map-container">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60196.15!2d73.7898!3d19.9975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bddeb9d3a8b2d43%3A0x4f8f8f8f8f8f8f8f!2sNashik%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
+                width="100%"
+                height="120%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+
           <div className="itinerary-section">
             <h2 className="section-title">
               <i className="fas fa-route"></i> Suggested Itinerary

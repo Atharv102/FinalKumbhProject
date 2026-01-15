@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import './AuthPages.css';
 
 const LoginPage = ({ onClose, onSwitchToSignup }) => {
+  const [userType, setUserType] = useState('customer');
   const [formData, setFormData] = useState({
+    mobile: '',
     email: '',
     password: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login:', formData);
+    console.log('Login:', { userType, ...formData });
     onClose();
   };
 
@@ -37,15 +39,33 @@ const LoginPage = ({ onClose, onSwitchToSignup }) => {
               <p className="auth-form-subtitle">Sign in to continue your journey</p>
             </div>
 
+            {/* Role Selection */}
+            <div className="role-selector">
+              <button
+                type="button"
+                className={`role-btn ${userType === 'customer' ? 'active' : ''}`}
+                onClick={() => setUserType('customer')}
+              >
+                <i className="fas fa-user"></i> Customer
+              </button>
+              <button
+                type="button"
+                className={`role-btn ${userType === 'host' ? 'active' : ''}`}
+                onClick={() => setUserType('host')}
+              >
+                <i className="fas fa-home"></i> Host/Owner
+              </button>
+            </div>
+
             <form className="auth-form-main" onSubmit={handleSubmit}>
               <div className="auth-input-group">
-                <label className="auth-label">Email</label>
+                <label className="auth-label">Mobile Number</label>
                 <input
-                  type="email"
+                  type="tel"
                   className="auth-input"
-                  placeholder="your.email@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  placeholder="Enter mobile number"
+                  value={formData.mobile}
+                  onChange={(e) => setFormData({...formData, mobile: e.target.value})}
                   required
                 />
               </div>
@@ -63,7 +83,7 @@ const LoginPage = ({ onClose, onSwitchToSignup }) => {
               </div>
 
               <button type="submit" className="auth-submit-btn">
-                Sign In
+                Sign In as {userType === 'customer' ? 'Customer' : 'Host'}
               </button>
             </form>
 

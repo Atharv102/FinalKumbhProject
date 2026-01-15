@@ -36,21 +36,25 @@ const LandingPage = () => {
   const handleCardClick = (item) => {
     setSelectedProperty(item);
     setCurrentView('detail');
+    window.scrollTo(0, 0);
   };
 
   const handleSeeMore = (category) => {
     setSelectedCategory(category);
     setCurrentView('listings');
+    window.scrollTo(0, 0);
   };
 
   const handleBackToLanding = () => {
     setCurrentView('landing');
     setSelectedProperty(null);
+    window.scrollTo(0, 0);
   };
 
   const handleBackToListings = () => {
     setCurrentView('listings');
     setSelectedProperty(null);
+    window.scrollTo(0, 0);
   };
 
   // Show Contact Us Page
