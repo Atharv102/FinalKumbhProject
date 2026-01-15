@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Test</title>
+</head>
+<body>
+    <h1>Image Upload Test</h1>
+    <form action="/api/photos/test-upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="photos" multiple accept="image/*">
+        <button type="submit">Upload Test Images</button>
+    </form>
+    
+    <div id="images">
+        <!-- Images will be displayed here -->
+    </div>
+</body>
+</html>

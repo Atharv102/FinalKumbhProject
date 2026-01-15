@@ -24,7 +24,7 @@ const PropertyDetailPage = ({ property, onBack }) => {
   }
 
   const additionalImages = [
-    property.image,
+    property.image || (property.images && property.images[0]?.url) || 'https://via.placeholder.com/500x300?text=No+Image',
     "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=500",
     "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=500",
     "https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=500"
@@ -54,7 +54,7 @@ const PropertyDetailPage = ({ property, onBack }) => {
   ];
 
   const calculateTotal = () => {
-    const pricePerNight = parseInt(property.price.replace(/[₹,]/g, ''));
+    const pricePerNight = parseInt((property.price || `₹${property.pricing?.basePrice}`).replace(/[₹,]/g, ''));
     const nights = checkIn && checkOut ? Math.ceil((new Date(checkOut) - new Date(checkIn)) / (1000 * 60 * 60 * 24)) : 1;
     return pricePerNight * nights * guests;
   };
@@ -68,9 +68,9 @@ const PropertyDetailPage = ({ property, onBack }) => {
       <div className="detail-content-grid">
         <div className="detail-left">
           <div className="photos-section">
-            <h2 className="section-title">{property.name}</h2>
+            <h2 className="section-title">{property.name || property.title}</h2>
             <p className="property-location">
-              <i className="fas fa-map-marker-alt"></i> {property.location}
+              <i className="fas fa-map-marker-alt"></i> {property.location?.address || property.location?.city || property.location}
             </p>
             <div className="photos-grid">
               {additionalImages.map((img, idx) => (
@@ -180,9 +180,9 @@ const PropertyDetailPage = ({ property, onBack }) => {
           <div className="payment-section">
             <h2 className="section-title">Booking Details</h2>
 
-            <div className="price-display">
+              <div className="price-display">
               <span className="price-label">Price per night</span>
-              <span className="price-value">{property.price}</span>
+              <span className="price-value">{property.price || `₹${property.pricing?.basePrice}`}</span>
             </div>
 
             <div className="booking-form">

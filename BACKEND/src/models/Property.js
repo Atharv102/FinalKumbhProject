@@ -58,7 +58,8 @@ const propertySchema = new mongoose.Schema({
   }],
   images: [{
     url: String,
-    caption: String
+    caption: String,
+    publicId: String
   }],
   host: {
     type: mongoose.Schema.Types.ObjectId,

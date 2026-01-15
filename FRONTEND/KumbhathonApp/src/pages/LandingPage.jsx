@@ -34,7 +34,11 @@ const LandingPage = () => {
     setLoading(true);
     try {
       const response = await propertyAPI.getAll();
-      const allProperties = response.data;
+      const allProperties = response.data || [];
+      
+      if (!allProperties || allProperties.length === 0) {
+        throw new Error('No properties found');
+      }
       
       // Group properties by type
       const grouped = {

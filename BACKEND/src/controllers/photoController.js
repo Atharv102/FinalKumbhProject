@@ -1,27 +1,55 @@
 const multer = require('multer');
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
-const cloudinary = require('cloudinary').v2;
+const path = require('path');
+const fs = require('fs');
 const { isWithinKumbhArea, getLocationName } = require('../utils/locationVerification');
 const Property = require('../models/Property');
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-});
+// Check if Cloudinary is configured
+const isCloudinaryConfigured = () => {
+  return process.env.CLOUDINARY_CLOUD_NAME && 
+         process.env.CLOUDINARY_API_KEY && 
+         process.env.CLOUDINARY_API_SECRET;
+};
 
-// Configure Cloudinary storage
-const storage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: 'kumbhathon-properties',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [
-      { width: 1200, height: 800, crop: 'limit', quality: 'auto' }
-    ]
-  }
-});
+let cloudinary, CloudinaryStorage;
+
+// Configure Cloudinary only if credentials are available
+if (isCloudinaryConfigured()) {
+  cloudinary = require('cloudinary').v2;
+  CloudinaryStorage = require('multer-storage-cloudinary').CloudinaryStorage;
+  
+  cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
+}
+
+// Configure storage (Cloudinary or local)
+const storage = isCloudinaryConfigured() 
+  ? new CloudinaryStorage({
+      cloudinary: cloudinary,
+      params: {
+        folder: 'kumbhathon-properties',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+        transformation: [
+          { width: 1200, height: 800, crop: 'limit', quality: 'auto' }
+        ]
+      }
+    })
+  : multer.diskStorage({
+      destination: (req, file, cb) => {
+        const uploadPath = path.join(__dirname, '../../uploads/properties');
+        if (!fs.existsSync(uploadPath)) {
+          fs.mkdirSync(uploadPath, { recursive: true });
+        }
+        cb(null, uploadPath);
+      },
+      filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+      }
+    });
 
 const upload = multer({ 
   storage: storage,
@@ -110,11 +138,17 @@ exports.uploadPhotos = async (req, res) => {
     }
 
     // Process uploaded files
-    const uploadedImages = req.files.map(file => ({
-      url: file.path,
-      caption: req.body.caption || '',
-      publicId: file.filename
-    }));
+    const uploadedImages = req.files.map(file => {
+      const imageUrl = isCloudinaryConfigured() 
+        ? file.path // Cloudinary URL
+        : `${req.protocol}://${req.get('host')}/uploads/properties/${file.filename}`; // Local URL
+      
+      return {
+        url: imageUrl,
+        caption: req.body.caption || '',
+        publicId: isCloudinaryConfigured() ? file.filename : file.filename
+      };
+    });
 
     // Add images to property
     property.images = [...(property.images || []), ...uploadedImages];
@@ -157,9 +191,16 @@ exports.deletePhoto = async (req, res) => {
 
     const photo = property.images[photoIndex];
     
-    // Delete from Cloudinary
-    if (photo.publicId) {
+    // Delete from storage
+    if (isCloudinaryConfigured() && photo.publicId) {
+      // Delete from Cloudinary
       await cloudinary.uploader.destroy(photo.publicId);
+    } else if (!isCloudinaryConfigured() && photo.publicId) {
+      // Delete local file
+      const filePath = path.join(__dirname, '../../uploads/properties', photo.publicId);
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
     }
 
     // Remove from property

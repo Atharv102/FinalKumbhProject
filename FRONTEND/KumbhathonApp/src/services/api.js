@@ -96,7 +96,7 @@ export const propertyAPI = {
       const response = await fetch(url);
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
-      return data;
+      return { data: data.data || data };
     } catch (error) {
       throw error;
     }
@@ -108,7 +108,7 @@ export const propertyAPI = {
       const response = await fetch(`${API_BASE_URL}/properties/${id}`);
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
-      return data;
+      return { data: data.data || data };
     } catch (error) {
       throw error;
     }
@@ -169,7 +169,7 @@ export const propertyAPI = {
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message);
-      return data;
+      return { data: data.data || data };
     } catch (error) {
       throw error;
     }

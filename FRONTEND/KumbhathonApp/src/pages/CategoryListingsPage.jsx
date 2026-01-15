@@ -30,22 +30,30 @@ const CategoryListingsPage = ({ accommodations, onBack, onCardClick, type = 'hot
           <p className="listings-subtitle">Browse all available {type} for Kumbh Mela 2027</p>
           
           <div className="listings-grid">
-            {items.map((item) => (
-              <div key={item.id} className="listing-card" onClick={() => onCardClick(item)}>
-                <img src={item.image} alt={item.name} className="listing-image" />
+            {items.map((item) => {
+              const imageUrl = item.image || (item.images && item.images[0]?.url) || 'https://via.placeholder.com/500x300?text=No+Image';
+              const displayName = item.name || item.title;
+              const displayPrice = item.price || `₹${item.pricing?.basePrice}`;
+              const displayRating = item.rating || item.ratings?.average || 0;
+              const displayLocation = item.location?.address || item.location?.city || item.location;
+              const displayAmenities = item.amenities?.join(', ') || item.amenities;
+              
+              return (
+              <div key={item.id || item._id} className="listing-card" onClick={() => onCardClick(item)}>
+                <img src={imageUrl} alt={displayName} className="listing-image" />
                 <div className="listing-details">
-                  <h3 className="listing-name">{item.name}</h3>
+                  <h3 className="listing-name">{displayName}</h3>
                   <p className="listing-location">
-                    <i className="fas fa-map-marker-alt"></i> {item.location}
+                    <i className="fas fa-map-marker-alt"></i> {displayLocation}
                   </p>
-                  <p className="listing-amenities">{item.amenities}</p>
+                  <p className="listing-amenities">{displayAmenities}</p>
                   <div className="listing-footer">
-                    <span className="listing-price">{item.price}/night</span>
-                    <span className="listing-rating">{item.rating} ★</span>
+                    <span className="listing-price">{displayPrice}/night</span>
+                    <span className="listing-rating">{displayRating} ★</span>
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         </div>
 
